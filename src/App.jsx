@@ -10,46 +10,73 @@ function App() {
   useEffect(()=>{
     fetch('https://the-trivia-api.com/v2/questions').then((data)=>data.json()).then((data)=>{
       setArr(data)
-      console.log(data)
       setAns([...data[count].incorrectAnswers,data[count].correctAnswer].toSorted())
     }).catch((err)=>{
       console.log(err)
     })
   },[eff])
-  if(!arr.length){
-    return <h1>...Loading</h1>
-  }
-  if(count>9){
-    return <div>{score>=7?`Passed: ${score} out of 10`:`Failed: ${score} out of 10`}
-    <button onClick={()=>{
-      setCount(0)
-      setScore(0)
-      setAns([])
-      setArr([])
-      setPoint(-1)
-      setEff(++eff)
-    }}>Restart</button>
-    </div>
-  }
+  if (!arr.length) {
+  return <h1 style={{ color: '#fff', textAlign: 'center' }}>...Loading</h1>
+}
+
+if (count > 9) {
   return (
-    <div>
-      <div>{arr[count].question.text}</div>
-      <div>
-        {ans.map((cv,ci)=>{
-              return <div key={ci}><input checked={point==ci} type="radio" value={ci} onChange={(e)=>setPoint(e.target.value)} name="1" id={ci} /><label htmlFor={ci}>{cv}</label></div>
-            })}
+    <div className="container">
+      <div className="result">
+        {score >= 7 ? `Passed: ${score} out of 10` : `Failed: ${score} out of 10`}
       </div>
-      <button onClick={()=>{
-        if(arr[count].correctAnswer==ans[point]){
+      <button
+        onClick={() => {
+          setCount(0)
+          setScore(0)
+          setAns([])
+          setArr([])
+          setPoint(-1)
+          setEff(++eff)
+        }}
+      >
+        Restart
+      </button>
+    </div>
+  )
+}
+
+return (
+  <div className="container">
+    <div className="question">{arr[count].question.text}</div>
+    <div className="options">
+      {ans.map((cv, ci) => {
+        return (
+          <label key={ci} htmlFor={ci}>
+            <input
+              checked={point == ci}
+              type="radio"
+              value={ci}
+              onChange={(e) => setPoint(e.target.value)}
+              name="option"
+              id={ci}
+            />
+            {cv}
+          </label>
+        )
+      })}
+    </div>
+    <button
+      onClick={() => {
+        if (arr[count].correctAnswer == ans[point]) {
           setScore(++score)
         }
         setCount(++count)
         setPoint(-1)
-        if(count<=9){
-          setAns([...arr[count].incorrectAnswers,arr[count].correctAnswer].toSorted())
+        if (count <= 9) {
+          setAns([...arr[count].incorrectAnswers, arr[count].correctAnswer].toSorted())
         }
-      }}>Next</button>
-    </div>
-  )
+      }}
+    >
+      Next
+    </button>
+  </div>
+)
+
 }
 export default App
