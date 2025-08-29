@@ -6,7 +6,7 @@ function App() {
   let [ans,setAns]=useState([])
   let [arr,setArr]=useState([])
   let [point,setPoint]=useState(-1)
-  let [eff,setEff]=useState(0)
+  let [eff,setEff]=useState(false)
   useEffect(()=>{
     fetch('https://the-trivia-api.com/v2/questions').then((data)=>data.json()).then((data)=>{
       setArr(data)
@@ -32,7 +32,7 @@ if (count > 9) {
           setAns([])
           setArr([])
           setPoint(-1)
-          setEff(++eff)
+          setEff(!eff)
         }}
       >
         Restart
