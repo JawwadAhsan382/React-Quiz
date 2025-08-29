@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.css'
 function App() {
   let [count, setCount] = useState(0)
@@ -16,7 +18,32 @@ function App() {
     })
   },[eff])
   if (!arr.length) {
-  return <h1 style={{ color: '#fff', textAlign: 'center' }}>...Loading</h1>
+  return <div>
+    <div className="spinner-grow text-primary" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+<div className="spinner-grow text-secondary" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+<div className="spinner-grow text-success" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+<div className="spinner-grow text-danger" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+<div className="spinner-grow text-warning" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+<div className="spinner-grow text-info" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+<div className="spinner-grow text-light" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+<div className="spinner-grow text-dark" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+  </div>
 }
 
 if (count > 9) {
